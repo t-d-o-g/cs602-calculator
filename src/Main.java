@@ -1,15 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JOptionPane;
-
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
-
 
 public class Main extends javax.swing.JFrame {
 
@@ -17,12 +16,20 @@ public class Main extends javax.swing.JFrame {
     private JTextField jTextFieldB;
     private JTextField jTextFieldResult;
     private JLabel jLabelEquals;
+    private JLabel jLabelTitle;
     private JRadioButton jRadioButtonAdd;
     private JRadioButton jRadioButtonSubtract;
     private JRadioButton jRadioButtonMultiply;
     private JRadioButton jRadioButtonDivide;
     private ButtonGroup buttonGroup;
     private Color backgroundColor;
+    private Font font;
+    private enum Operator {
+        ADD,
+        SUBTRACT,
+        MULTIPLY,
+        DIVIDE
+    };
 
 
     /**
@@ -45,11 +52,18 @@ public class Main extends javax.swing.JFrame {
 
     private void initGUI() {
         backgroundColor = new Color(200, 200, 200);
+        font = new Font("Monospaced", Font.BOLD, 18);
+        jLabelTitle = new JLabel("Calculator");
+        jLabelTitle.setBounds(25, 25, 160, 25);
+        jLabelTitle.setFont(font);
+        getContentPane().add(jLabelTitle);
         jLabelEquals = new JLabel("=");
-        jLabelEquals.setBounds(265, 100, 35, 30);
+        jLabelEquals.setFont(font);
+        jLabelEquals.setBounds(360, 100, 35, 30);
         getContentPane().add(jLabelEquals);
         jTextFieldResult = new JTextField();
-        jTextFieldResult.setBounds(295, 100, 160, 40);
+        jTextFieldResult.setBounds(400, 100, 215, 40);
+        jTextFieldResult.setFont(font);
         getContentPane().add(jTextFieldResult);
         try {
             setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -59,7 +73,8 @@ public class Main extends javax.swing.JFrame {
                 jRadioButtonAdd = new JRadioButton();
                 getContentPane().add(jRadioButtonAdd);
                 jRadioButtonAdd.setText("+");
-                jRadioButtonAdd.setBounds(120, 65, 35, 35);
+                jRadioButtonAdd.setFont(font);
+                jRadioButtonAdd.setBounds(160, 65, 50, 50);
                 jRadioButtonAdd.setBackground(backgroundColor);
                 getButtonGroup().add(jRadioButtonAdd);
                 jRadioButtonAdd.addActionListener(new ActionListener() {
@@ -72,7 +87,8 @@ public class Main extends javax.swing.JFrame {
                 jRadioButtonSubtract = new JRadioButton();
                 getContentPane().add(jRadioButtonSubtract);
                 jRadioButtonSubtract.setText("-");
-                jRadioButtonSubtract.setBounds(120, 100, 35, 35);
+                jRadioButtonSubtract.setFont(font);
+                jRadioButtonSubtract.setBounds(160, 100, 50, 50);
                 jRadioButtonSubtract.setBackground(backgroundColor);
                 getButtonGroup().add(jRadioButtonSubtract);
                 jRadioButtonSubtract.addActionListener(new ActionListener() {
@@ -85,7 +101,8 @@ public class Main extends javax.swing.JFrame {
                 jRadioButtonMultiply = new JRadioButton();
                 getContentPane().add(jRadioButtonMultiply);
                 jRadioButtonMultiply.setText("*");
-                jRadioButtonMultiply.setBounds(120, 135, 35, 35);
+                jRadioButtonMultiply.setFont(font);
+                jRadioButtonMultiply.setBounds(160, 135, 50, 50);
                 jRadioButtonMultiply.setBackground(backgroundColor);
                 getButtonGroup().add(jRadioButtonMultiply);
                 jRadioButtonMultiply.addActionListener(new ActionListener() {
@@ -98,7 +115,8 @@ public class Main extends javax.swing.JFrame {
                 jRadioButtonDivide = new JRadioButton();
                 getContentPane().add(jRadioButtonDivide);
                 jRadioButtonDivide.setText("/");
-                jRadioButtonDivide.setBounds(120, 170, 35, 35);
+                jRadioButtonDivide.setFont(font);
+                jRadioButtonDivide.setBounds(160, 170, 50, 50);
                 jRadioButtonDivide.setBackground(backgroundColor);
                 getButtonGroup().add(jRadioButtonDivide);
                 jRadioButtonDivide.addActionListener(new ActionListener() {
@@ -109,18 +127,22 @@ public class Main extends javax.swing.JFrame {
             }
             {
                 jTextFieldA = new JTextField();
-                jTextFieldA.setBounds(25, 100, 80, 40);
+                jTextFieldA.setBounds(25, 100, 120, 40);
+                jTextFieldA.setFont(font);
                 getContentPane().add(jTextFieldA);
             }
             {
                 jTextFieldB = new JTextField();
-                jTextFieldB.setBounds(170, 100, 80, 40);
+                jTextFieldB.setBounds(210, 100, 120, 40);
+                jTextFieldB.setFont(font);
                 getContentPane().add(jTextFieldB);
             }
             pack();
-            setSize(475, 300);
-        } catch (Exception e) {
-            //add your error handling code here
+            setSize(640, 300);
+        } catch (NumberFormatException e) {
+            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
         }
     }
 
@@ -131,71 +153,61 @@ public class Main extends javax.swing.JFrame {
         return buttonGroup;
     }
 
-    private void jRadioButtonAddActionPerformed(ActionEvent evt) {
-        System.out.println("jRadioButtonAdd.actionPerformed, event="+evt);
-        if (jTextFieldA.getText().isEmpty() || jTextFieldB.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: No input in one or both text fields.");
+    private void calculate(String a, String b, Enum Op) {
+        if (a.isEmpty() || b.isEmpty()) {
+            JLabel label = new JLabel("Error: No input in one or both text fields.");
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
             return;
         }
-        try {
-            String a = jTextFieldA.getText();
-            String b = jTextFieldB.getText();
-            int result = Integer.parseInt(a) + Integer.parseInt(b);
+        if (!a.matches("[0-9]+") || !b.matches("[0-9]+")) {
+            JLabel label = new JLabel("Error: Non integer inputs on one or both text fields.");
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+            return;
+        }
+        if (Op == Operator.DIVIDE) {
+            if (!b.equals("0")) {
+                float result = (float) Integer.parseInt(a) + Integer.parseInt(b);
+                jTextFieldResult.setText(String.format("%.8f", result));
+            } else {
+                JLabel label = new JLabel("Error: Division by zero.");
+                label.setFont(new Font("Monospaced", Font.BOLD, 14));
+                JOptionPane.showMessageDialog(null, label);
+            }
+        } else if (Op == Operator.MULTIPLY){
+            long result = (long) Integer.parseInt(a) * Integer.parseInt(b);
             jTextFieldResult.setText(String.valueOf(result));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: Non integer inputs on one or both text fields.");
+        } else if (Op == Operator.SUBTRACT) {
+            int result = Integer.parseInt(a) - Integer.parseInt(b);
+            jTextFieldResult.setText(String.valueOf(result));
+        } else {
+            long result = (long) Integer.parseInt(a) + Integer.parseInt(b);
+            jTextFieldResult.setText(String.valueOf(result));
         }
     }
 
+    private void jRadioButtonAddActionPerformed(ActionEvent evt) {
+        String a = jTextFieldA.getText().trim();
+        String b = jTextFieldB.getText().trim();
+        calculate(a, b, Operator.ADD);
+    }
+
     private void jRadioButtonSubtractActionPerformed(ActionEvent evt) {
-        System.out.println("jRadioButtonSubtract.actionPerformed, event="+evt);
-        if (jTextFieldA.getText().isEmpty() || jTextFieldB.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: No input in one or both text fields.");
-            return;
-        }
-        try {
-            String a = jTextFieldA.getText();
-            String b = jTextFieldB.getText();
-            int result = Integer.parseInt(a) - Integer.parseInt(b);
-            jTextFieldResult.setText(String.valueOf(result));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: Non integer inputs on one or both text fields.");
-        }
-}
+        String a = jTextFieldA.getText().trim();
+        String b = jTextFieldB.getText().trim();
+        calculate(a, b, Operator.SUBTRACT);
+    }
 
     private void jRadioButtonMultiplyActionPerformed(ActionEvent evt) {
-        System.out.println("jRadioButtonMultiply.actionPerformed, event="+evt);
-        if (jTextFieldA.getText().isEmpty() || jTextFieldB.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: No input in one or both text fields.");
-            return;
-        }
-        try {
-            String a = jTextFieldA.getText();
-            String b = jTextFieldB.getText();
-            int result = Integer.parseInt(a) * Integer.parseInt(b);
-            jTextFieldResult.setText(String.valueOf(result));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: Non integer inputs on one or both text fields.");
-        }
-}
+        String a = jTextFieldA.getText().trim();
+        String b = jTextFieldB.getText().trim();
+        calculate(a, b, Operator.MULTIPLY);
+    }
 
     private void jRadioButtonDivideActionPerformed(ActionEvent evt) {
-        System.out.println("jRadioButtonDivide.actionPerformed, event="+evt);
-        if (jTextFieldA.getText().isEmpty() || jTextFieldB.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: No input in one or both text fields.");
-            return;
-        }
-        try {
-            String a = jTextFieldA.getText();
-            String b = jTextFieldB.getText();
-            if (!b.equals("0")) {
-                float floatResult = (float) Integer.parseInt(a) / Integer.parseInt(b);
-                jTextFieldResult.setText(String.valueOf(floatResult));
-            } else {
-                JOptionPane.showMessageDialog(null, "Division by zero.");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error: Non integer inputs on one or both text fields.");
-        }
+        String a = jTextFieldA.getText().trim();
+        String b = jTextFieldB.getText().trim();
+        calculate(a, b, Operator.DIVIDE);
     }
 }
