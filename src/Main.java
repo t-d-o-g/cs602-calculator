@@ -168,7 +168,7 @@ public class Main extends javax.swing.JFrame {
         }
         if (Op == Operator.DIVIDE) {
             if (!b.equals("0")) {
-                float result = (float) Integer.parseInt(a) + Integer.parseInt(b);
+                float result = (float) Integer.parseInt(a) / Integer.parseInt(b);
                 jTextFieldResult.setText(String.format("%.8f", result));
             } else {
                 JLabel label = new JLabel("Error: Division by zero.");
