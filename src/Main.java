@@ -10,6 +10,18 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+class EmptyTextFieldException extends Exception {
+    EmptyTextFieldException(String message) {
+        super(message);
+    }
+}
+
+class NonIntegerTextFieldException extends Exception {
+    NonIntegerTextFieldException(String message) {
+        super(message);
+    }
+}
+
 public class Main extends javax.swing.JFrame {
 
     private JTextField jTextFieldA;
@@ -29,12 +41,8 @@ public class Main extends javax.swing.JFrame {
         SUBTRACT,
         MULTIPLY,
         DIVIDE
-    };
+    }
 
-
-    /**
-     * Auto-generated main method to display this JFrame
-     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -153,27 +161,22 @@ public class Main extends javax.swing.JFrame {
         return buttonGroup;
     }
 
-    private void calculate(String a, String b, Enum Op) {
+    private void calculate(String a, String b, Enum Op) throws EmptyTextFieldException, NonIntegerTextFieldException {
         if (a.isEmpty() || b.isEmpty()) {
-            JLabel label = new JLabel("Error: No input in one or both text fields.");
-            label.setFont(new Font("Monospaced", Font.BOLD, 14));
-            JOptionPane.showMessageDialog(null, label);
-            return;
+            throw new EmptyTextFieldException("Error: No input in one or both text fields.");
         }
-        if (!a.matches("[0-9]+") || !b.matches("[0-9]+")) {
-            JLabel label = new JLabel("Error: Non integer inputs on one or both text fields.");
-            label.setFont(new Font("Monospaced", Font.BOLD, 14));
-            JOptionPane.showMessageDialog(null, label);
-            return;
+        if (!a.matches("\\d+") || !b.matches("\\d+")) {
+            throw new NonIntegerTextFieldException("Error: Non integer inputs on one or both text fields.");
         }
+
         if (Op == Operator.DIVIDE) {
-            if (!b.equals("0")) {
-                float result = (float) Integer.parseInt(a) / Integer.parseInt(b);
-                jTextFieldResult.setText(String.format("%.8f", result));
-            } else {
+            if (b.equals("0")) {
                 JLabel label = new JLabel("Error: Division by zero.");
                 label.setFont(new Font("Monospaced", Font.BOLD, 14));
                 JOptionPane.showMessageDialog(null, label);
+            } else {
+                float result = (float) Integer.parseInt(a) / Integer.parseInt(b);
+                jTextFieldResult.setText(String.format("%.8f", result));
             }
         } else if (Op == Operator.MULTIPLY){
             long result = (long) Integer.parseInt(a) * Integer.parseInt(b);
@@ -190,24 +193,68 @@ public class Main extends javax.swing.JFrame {
     private void jRadioButtonAddActionPerformed(ActionEvent evt) {
         String a = jTextFieldA.getText().trim();
         String b = jTextFieldB.getText().trim();
-        calculate(a, b, Operator.ADD);
+
+        try {
+            calculate(a, b, Operator.ADD);
+        } catch (EmptyTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NonIntegerTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        }
     }
 
     private void jRadioButtonSubtractActionPerformed(ActionEvent evt) {
         String a = jTextFieldA.getText().trim();
         String b = jTextFieldB.getText().trim();
-        calculate(a, b, Operator.SUBTRACT);
+
+        try {
+            calculate(a, b, Operator.ADD);
+        } catch (EmptyTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NonIntegerTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        }
     }
 
     private void jRadioButtonMultiplyActionPerformed(ActionEvent evt) {
         String a = jTextFieldA.getText().trim();
         String b = jTextFieldB.getText().trim();
-        calculate(a, b, Operator.MULTIPLY);
+
+        try {
+            calculate(a, b, Operator.ADD);
+        } catch (EmptyTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NonIntegerTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        }
     }
 
     private void jRadioButtonDivideActionPerformed(ActionEvent evt) {
         String a = jTextFieldA.getText().trim();
         String b = jTextFieldB.getText().trim();
-        calculate(a, b, Operator.DIVIDE);
+
+        try {
+            calculate(a, b, Operator.DIVIDE);
+        } catch (EmptyTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NonIntegerTextFieldException e) {
+            JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        }
     }
 }
