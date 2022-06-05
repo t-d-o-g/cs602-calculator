@@ -73,85 +73,75 @@ public class Main extends javax.swing.JFrame {
         jTextFieldResult.setBounds(400, 100, 215, 40);
         jTextFieldResult.setFont(font);
         getContentPane().add(jTextFieldResult);
-        try {
-            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            getContentPane().setLayout(null);
-            getContentPane().setBackground(backgroundColor);
-            {
-                jRadioButtonAdd = new JRadioButton();
-                getContentPane().add(jRadioButtonAdd);
-                jRadioButtonAdd.setText("+");
-                jRadioButtonAdd.setFont(font);
-                jRadioButtonAdd.setBounds(160, 65, 50, 50);
-                jRadioButtonAdd.setBackground(backgroundColor);
-                getButtonGroup().add(jRadioButtonAdd);
-                jRadioButtonAdd.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        jRadioButtonAddActionPerformed(evt);
-                    }
-                });
-            }
-            {
-                jRadioButtonSubtract = new JRadioButton();
-                getContentPane().add(jRadioButtonSubtract);
-                jRadioButtonSubtract.setText("-");
-                jRadioButtonSubtract.setFont(font);
-                jRadioButtonSubtract.setBounds(160, 100, 50, 50);
-                jRadioButtonSubtract.setBackground(backgroundColor);
-                getButtonGroup().add(jRadioButtonSubtract);
-                jRadioButtonSubtract.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        jRadioButtonSubtractActionPerformed(evt);
-                    }
-                });
-            }
-            {
-                jRadioButtonMultiply = new JRadioButton();
-                getContentPane().add(jRadioButtonMultiply);
-                jRadioButtonMultiply.setText("*");
-                jRadioButtonMultiply.setFont(font);
-                jRadioButtonMultiply.setBounds(160, 135, 50, 50);
-                jRadioButtonMultiply.setBackground(backgroundColor);
-                getButtonGroup().add(jRadioButtonMultiply);
-                jRadioButtonMultiply.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        jRadioButtonMultiplyActionPerformed(evt);
-                    }
-                });
-            }
-            {
-                jRadioButtonDivide = new JRadioButton();
-                getContentPane().add(jRadioButtonDivide);
-                jRadioButtonDivide.setText("/");
-                jRadioButtonDivide.setFont(font);
-                jRadioButtonDivide.setBounds(160, 170, 50, 50);
-                jRadioButtonDivide.setBackground(backgroundColor);
-                getButtonGroup().add(jRadioButtonDivide);
-                jRadioButtonDivide.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        jRadioButtonDivideActionPerformed(evt);
-                    }
-                });
-            }
-            {
-                jTextFieldA = new JTextField();
-                jTextFieldA.setBounds(25, 100, 120, 40);
-                jTextFieldA.setFont(font);
-                getContentPane().add(jTextFieldA);
-            }
-            {
-                jTextFieldB = new JTextField();
-                jTextFieldB.setBounds(210, 100, 120, 40);
-                jTextFieldB.setFont(font);
-                getContentPane().add(jTextFieldB);
-            }
-            pack();
-            setSize(640, 300);
-        } catch (NumberFormatException e) {
-            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
-            label.setFont(new Font("Monospaced", Font.BOLD, 14));
-            JOptionPane.showMessageDialog(null, label);
-        }
+
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().setBackground(backgroundColor);
+
+        jRadioButtonAdd = new JRadioButton();
+        getContentPane().add(jRadioButtonAdd);
+        jRadioButtonAdd.setText("+");
+        jRadioButtonAdd.setFont(font);
+        jRadioButtonAdd.setBounds(160, 65, 50, 50);
+        jRadioButtonAdd.setBackground(backgroundColor);
+        getButtonGroup().add(jRadioButtonAdd);
+        jRadioButtonAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                                                       jRadioButtonAddActionPerformed(evt);
+                                                                                           }
+        });
+
+        jRadioButtonSubtract = new JRadioButton();
+        getContentPane().add(jRadioButtonSubtract);
+        jRadioButtonSubtract.setText("-");
+        jRadioButtonSubtract.setFont(font);
+        jRadioButtonSubtract.setBounds(160, 100, 50, 50);
+        jRadioButtonSubtract.setBackground(backgroundColor);
+        getButtonGroup().add(jRadioButtonSubtract);
+        jRadioButtonSubtract.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                                                       jRadioButtonSubtractActionPerformed(evt);
+                                                                                                }
+        });
+
+        jRadioButtonMultiply = new JRadioButton();
+        getContentPane().add(jRadioButtonMultiply);
+        jRadioButtonMultiply.setText("*");
+        jRadioButtonMultiply.setFont(font);
+        jRadioButtonMultiply.setBounds(160, 135, 50, 50);
+        jRadioButtonMultiply.setBackground(backgroundColor);
+        getButtonGroup().add(jRadioButtonMultiply);
+        jRadioButtonMultiply.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                                                       jRadioButtonMultiplyActionPerformed(evt);
+                                                                                                }
+        });
+
+        jRadioButtonDivide = new JRadioButton();
+        getContentPane().add(jRadioButtonDivide);
+        jRadioButtonDivide.setText("/");
+        jRadioButtonDivide.setFont(font);
+        jRadioButtonDivide.setBounds(160, 170, 50, 50);
+        jRadioButtonDivide.setBackground(backgroundColor);
+        getButtonGroup().add(jRadioButtonDivide);
+        jRadioButtonDivide.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                                                       jRadioButtonDivideActionPerformed(evt);
+                                                                                              }
+        });
+
+        jTextFieldA = new JTextField();
+        jTextFieldA.setBounds(25, 100, 120, 40);
+        jTextFieldA.setFont(font);
+        getContentPane().add(jTextFieldA);
+
+        jTextFieldB = new JTextField();
+        jTextFieldB.setBounds(210, 100, 120, 40);
+        jTextFieldB.setFont(font);
+        getContentPane().add(jTextFieldB);
+
+        pack();
+        setSize(640, 300);
     }
 
     private ButtonGroup getButtonGroup() {
@@ -201,18 +191,26 @@ public class Main extends javax.swing.JFrame {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
+        } catch (NumberFormatException e) {
+            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
         }
     }
 
     private void jRadioButtonSubtractActionPerformed(ActionEvent evt) {
         try {
-            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.SUBTRACT);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NumberFormatException e) {
+            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         }
@@ -220,13 +218,17 @@ public class Main extends javax.swing.JFrame {
 
     private void jRadioButtonMultiplyActionPerformed(ActionEvent evt) {
         try {
-            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.MULTIPLY);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NumberFormatException e) {
+            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         }
@@ -241,6 +243,10 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
+            label.setFont(new Font("Monospaced", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(null, label);
+        } catch (NumberFormatException e) {
+            JLabel label = new JLabel("Error: Max integer value 2147483647 exceeded in one or both text fields");
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         }
