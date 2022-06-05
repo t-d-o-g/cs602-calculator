@@ -153,10 +153,10 @@ public class Main extends javax.swing.JFrame {
 
     private void calculate(String a, String b, Enum Op) throws EmptyTextFieldException, NonIntegerTextFieldException {
         if (a.isEmpty() || b.isEmpty()) {
-            throw new EmptyTextFieldException("Error: No input in one or both text fields.");
+            throw new EmptyTextFieldException("No input in one or both text fields.");
         }
         if (!a.matches("\\d+") || !b.matches("\\d+")) {
-            throw new NonIntegerTextFieldException("Error: Non integer inputs on one or both text fields.");
+            throw new NonIntegerTextFieldException("Non integer inputs on one or both text fields.");
         }
 
         if (Op == Operator.DIVIDE) {
@@ -184,11 +184,11 @@ public class Main extends javax.swing.JFrame {
         try {
             calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
         } catch (EmptyTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NumberFormatException e) {
@@ -202,11 +202,11 @@ public class Main extends javax.swing.JFrame {
         try {
             calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.SUBTRACT);
         } catch (EmptyTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NumberFormatException e) {
@@ -220,11 +220,11 @@ public class Main extends javax.swing.JFrame {
         try {
             calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.MULTIPLY);
         } catch (EmptyTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NumberFormatException e) {
@@ -238,11 +238,11 @@ public class Main extends javax.swing.JFrame {
         try {
             calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.DIVIDE);
         } catch (EmptyTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NonIntegerTextFieldException e) {
-            JLabel label = new JLabel(e.getMessage());
+            JLabel label = new JLabel(String.valueOf(e));
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
             JOptionPane.showMessageDialog(null, label);
         } catch (NumberFormatException e) {
