@@ -191,11 +191,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void jRadioButtonAddActionPerformed(ActionEvent evt) {
-        String a = jTextFieldA.getText().trim();
-        String b = jTextFieldB.getText().trim();
-
         try {
-            calculate(a, b, Operator.ADD);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
@@ -208,11 +205,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void jRadioButtonSubtractActionPerformed(ActionEvent evt) {
-        String a = jTextFieldA.getText().trim();
-        String b = jTextFieldB.getText().trim();
-
         try {
-            calculate(a, b, Operator.ADD);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
@@ -225,11 +219,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void jRadioButtonMultiplyActionPerformed(ActionEvent evt) {
-        String a = jTextFieldA.getText().trim();
-        String b = jTextFieldB.getText().trim();
-
         try {
-            calculate(a, b, Operator.ADD);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.ADD);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
@@ -242,11 +233,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void jRadioButtonDivideActionPerformed(ActionEvent evt) {
-        String a = jTextFieldA.getText().trim();
-        String b = jTextFieldB.getText().trim();
-
         try {
-            calculate(a, b, Operator.DIVIDE);
+            calculate(jTextFieldA.getText().trim(), jTextFieldB.getText().trim(), Operator.DIVIDE);
         } catch (EmptyTextFieldException e) {
             JLabel label = new JLabel(e.getMessage());
             label.setFont(new Font("Monospaced", Font.BOLD, 14));
